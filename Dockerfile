@@ -27,4 +27,4 @@ USER teamcity
 
 EXPOSE 8111
 
-CMD ["./TeamCity/bin/teamcity-server.sh", "run"
+CMD ["TeamCity/bin/teamcity-server.sh", "run"]

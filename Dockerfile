@@ -1,29 +1,30 @@
-FROM napolitano/centos-jre8
+FROM napolitano/docker-centos7-jre8
 
 MAINTAINER Axel Napolitano <docker.2015@skjt.de>
 
-ENV TEAMCITY_VERSION 9.1
-
 VOLUME ["/var/lib/teamcity"]
 
-RUN mkdir -p /var/lib/teamcity
-RUN groupadd -g 999 teamcity
-RUN useradd -u 999 -g teamcity -d /var/lib/teamcity teamcity
-RUN chown -R teamcity:teamcity /var/lib/teamcity
-RUN chmod -R u+rwx /var/lib/teamcity
-RUN yum -y install wget
-RUN wget http://download.jetbrains.com/teamcity/TeamCity-$TEAMCITY_VERSION.tar.gz
-RUN echo "4fb84758df13126f79f0a9f42aa662569f5454e2c0457e40c9f42882a036e9a7	*TeamCity-$TEAMCITY_VERSION.tar.gz" >> SHA256SUM
-RUN sha256sum -c SHA256SUM
-RUN rm -f SHA256SUM
-RUN ls -la
-RUN mv TeamCity-$TEAMCITY_VERSION.tar.gz /opt
-RUN pushd /opt && tar -xvzf TeamCity-$TEAMCITY_VERSION.tar.gz && popd
-RUN yum -y remove wget
-RUN chown -R teamcity:teamcity /opt/TeamCity
+ENV TEAMCITY_VERSION 9.1
+ENV TEAMCITY_SERVER_MEM_OPTS -Xmx750m -XX:MaxPermSize=270m
+ENV TEAMCITY_DATA_PATH /var/lib/teamcity
+
+RUN mkdir -p /var/lib/teamcity && \
+	groupadd -g 999 teamcity && \
+	useradd -u 999 -g teamcity -d /var/lib/teamcity teamcity && \
+	chown -R teamcity:teamcity /var/lib/teamcity && \
+	chmod -R ug+rwx /var/lib/teamcity && \
+	yum -y install wget && \
+	wget http://download.jetbrains.com/teamcity/TeamCity-$TEAMCITY_VERSION.tar.gz && \
+	echo "4fb84758df13126f79f0a9f42aa662569f5454e2c0457e40c9f42882a036e9a7	*TeamCity-$TEAMCITY_VERSION.tar.gz" >> SHA256SUM && \
+	sha256sum -c SHA256SUM && \
+	rm -f SHA256SUM && \
+	tar -xvzf TeamCity-$TEAMCITY_VERSION.tar.gz && \
+	rm -f TeamCity-$TEAMCITY_VERSION.tar.gz && \
+	yum -y remove wget && \
+	chown -R teamcity:teamcity TeamCity
 
 USER teamcity
 
 EXPOSE 8111
 
-CMD ["/opt/TeamCity/bin/teamcity-server.sh", "run"]
+CMD ["./TeamCity/bin/teamcity-server.sh", "run"

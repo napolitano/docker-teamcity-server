@@ -9,7 +9,7 @@ https://registry.hub.docker.com/u/napolitano/docker-teamcity-server/
 
 If you want to test or evaluate TeamCity it is most convenient to use Kitematic, the GUI tool for docker. This can be found here: http://kitematic.com.
 
-For production use it really depends on your requirements. The easiest may would be to start the container and use it with preset configuration and integrated database. 
+For production use it really depends on your requirements. The easiest way would be to start the container and use it with preset configuration and integrated database. 
 
     docker run -dt --name teamcity-server -p 8111:8111 napolitano/docker-teamcity-server
 

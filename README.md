@@ -11,7 +11,7 @@ If you want to test or evaluate TeamCity it is most convenient to use Kitematic,
 
 For production use it really depends on your requirements. The easiest may would be to start the container and use it with preset configuration and integrated database. 
 
-  docker run -dt --name teamcity-server -p 8111:8111 napolitano/docker-teamcity-server
+    docker run -dt --name teamcity-server -p 8111:8111 napolitano/docker-teamcity-server
 
 However you may want more performance, better scalability and reliability - in this case you need an additional database (e.g. postgres) and an external data store. 
 

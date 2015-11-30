@@ -4,13 +4,13 @@ MAINTAINER Axel Napolitano <docker.2015@skjt.de>
 
 VOLUME ["/var/lib/teamcity"]
 
-ENV TEAMCITY_VERSION 9.1
-ENV TEAMCITY_SERVER_MEM_OPTS -Xmx750m -XX:MaxPermSize=270m
+ENV TEAMCITY_VERSION 9.1.4
+ENV TEAMCITY_SERVER_MEM_OPTS -Xmx750m -XX:MaxPermSize270m
 ENV TEAMCITY_DATA_PATH /var/lib/teamcity
 
 RUN yum -y install wget && \
 	wget http://download.jetbrains.com/teamcity/TeamCity-$TEAMCITY_VERSION.tar.gz && \
-	echo "4fb84758df13126f79f0a9f42aa662569f5454e2c0457e40c9f42882a036e9a7	*TeamCity-$TEAMCITY_VERSION.tar.gz" >> SHA256SUM && \
+	echo "86766b3b813cdfdd22cd26248d57c8fc71b3178a4dc74e113bc53bd73e8ad5cf	*TeamCity-$TEAMCITY_VERSION.tar.gz" >> SHA256SUM && \
 	sha256sum -c SHA256SUM && \
 	rm -f SHA256SUM && \
 	tar -xvzf TeamCity-$TEAMCITY_VERSION.tar.gz && \
@@ -19,4 +19,4 @@ RUN yum -y install wget && \
 
 EXPOSE 8111
 
-CMD ["TeamCity/bin/teamcity-server.sh", "run"]
+CMD TeamCity/bin/teamcity-server.sh run

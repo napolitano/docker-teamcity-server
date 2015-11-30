@@ -1,6 +1,6 @@
-# JetBrains TeamCity 9.1 Docker Container
+# JetBrains TeamCity 9.1.4 Docker Container
 
-This container allows you to run TeamCity CI Version 9.1 from JetBrains easily. It is based on a Centos 7 / Oracle JRE 8.
+This container allows you to run TeamCity CI Version 9.1.4 from JetBrains easily. It is based on a Centos 7 / Oracle JRE 8.
 
 You can find the container on docker hub:
 https://registry.hub.docker.com/u/napolitano/docker-teamcity-server/
